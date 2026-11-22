@@ -1,0 +1,198 @@
+/* style.css — Rune Duel's table: a night-sky felt, parchment cards, and the
+   four winds told apart by colour and shape. All art is CSS — no images. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --felt: #123a3f;
+  --felt-deep: #0b272c;
+  --gold: #e8b64c;
+  --parchment: #f6ead2;
+  --ink: #2b2118;
+}
+
+html, body { height: 100%; }
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  background: radial-gradient(ellipse at 50% 30%, #17505a 0%, var(--felt) 55%, var(--felt-deep) 100%);
+  color: var(--parchment);
+  overflow: hidden;
+  user-select: none;
+}
+
+.hidden { display: none !important; }
+.screen { height: 100vh; display: flex; flex-direction: column; }
+#table-screen { justify-content: space-between; }
+
+/* ---------------- title & end screens ---------------- */
+
+#title-screen, #end-screen { align-items: center; justify-content: center; text-align: center; }
+.title-art, .end-art { max-width: 640px; padding: 24px; }
+
+.title-runes { font-size: 40px; letter-spacing: 18px; margin-bottom: 10px; }
+.rune.ember { color: #e2483d; } .rune.tide { color: #2f7fd0; }
+.rune.grove { color: #3da34d; } .rune.gale { color: #b07fe8; }
+
+.game-logo {
+  font-size: 84px; letter-spacing: 6px; color: var(--gold);
+  text-shadow: 0 4px 0 #7a5410, 0 10px 28px rgba(0,0,0,.55);
+}
+.tagline { font-size: 24px; font-style: italic; color: #cfe8dd; margin: 4px 0 14px; }
+.title-blurb { font-size: 17px; line-height: 1.5; color: #dcefe7; margin-bottom: 22px; }
+
+.big-btn {
+  font-family: inherit; font-size: 22px; font-weight: bold; cursor: pointer;
+  color: #2b1d05; background: linear-gradient(#ffd873, var(--gold));
+  border: 2px solid #7a5410; border-radius: 12px; padding: 12px 34px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.45);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.big-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 24px rgba(0,0,0,.5); }
+.big-btn:disabled { filter: grayscale(.7); cursor: wait; transform: none; }
+.big-btn.small { font-size: 17px; padding: 10px 20px; }
+.ghost-btn {
+  font-family: inherit; font-size: 16px; cursor: pointer; margin-left: 12px;
+  color: var(--parchment); background: transparent; border: 1px solid #9fc6bb;
+  border-radius: 12px; padding: 11px 20px;
+}
+.howto {
+  text-align: left; margin: 22px auto 0; max-width: 560px; font-size: 14.5px; line-height: 1.45;
+  background: rgba(0,0,0,.35); border: 1px solid #3f7a72; border-radius: 12px; padding: 14px 20px;
+}
+.howto h3 { color: var(--gold); margin-bottom: 6px; }
+.howto li { margin: 4px 0 4px 18px; }
+
+#end-title { font-size: 76px; letter-spacing: 5px; }
+#end-title.win { color: var(--gold); text-shadow: 0 4px 0 #7a5410, 0 0 44px rgba(232,182,76,.65); }
+#end-title.loss { color: #b0563f; text-shadow: 0 4px 0 #571f10, 0 0 34px rgba(0,0,0,.6); }
+#end-text { font-size: 19px; font-style: italic; margin: 10px 0 14px; }
+#end-stats { font-size: 17px; margin-bottom: 24px; color: #cfe8dd; }
+
+/* ---------------- table layout ---------------- */
+
+#topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 18px; background: rgba(0,0,0,.28); border-bottom: 2px solid rgba(232,182,76,.35);
+}
+.hero { display: flex; align-items: center; gap: 12px; }
+.hero-face {
+  width: 52px; height: 52px; border-radius: 50%; font-size: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #ffe9a8, var(--gold));
+  color: #4a3205; border: 2px solid #7a5410;
+}
+.enemy-hero .hero-face { background: radial-gradient(circle at 35% 30%, #c9a0e8, #6d3f9e); color: #fff; border-color: #3c205e; }
+.hero-name { font-size: 15px; font-weight: bold; letter-spacing: .5px; }
+.life { font-size: 24px; font-weight: bold; }
+.life .heart { color: #ff5d73; }
+.hero-deck { font-size: 13px; color: #bcd8cf; }
+#turn-banner { font-size: 18px; font-style: italic; color: var(--gold); }
+.score-box { font-size: 15px; color: #dcefe7; }
+.score-box span { color: var(--gold); font-weight: bold; }
+
+#bottombar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 6px 18px 8px; background: rgba(0,0,0,.28); border-top: 2px solid rgba(232,182,76,.35);
+}
+.player-hero { flex-direction: column; align-items: flex-start; gap: 2px; min-width: 168px; }
+.player-hero .hero-face { width: 40px; height: 40px; font-size: 21px; }
+.energy { font-size: 14px; }
+.pip {
+  display: inline-block; width: 13px; height: 13px; margin-right: 3px; border-radius: 50%;
+  background: #274b47; border: 1px solid #7fb3a6;
+}
+.pip.full { background: radial-gradient(circle at 35% 30%, #b8ffe9, #22b573); }
+
+#midline {
+  text-align: center; padding: 3px 0; font-style: italic; font-size: 15.5px; color: #ffe9a8;
+  min-height: 24px; text-shadow: 0 1px 3px rgba(0,0,0,.7);
+}
+
+/* ---------------- cards ---------------- */
+
+.card-row, .board-row {
+  display: flex; justify-content: center; align-items: center; gap: 10px; padding: 4px 10px;
+}
+.board-row { min-height: 152px; }
+#player-hand { flex: 1; align-items: center; }
+#player-hand .card { width: 104px; height: 146px; }
+#player-hand .card-art { height: 44px; font-size: 29px; }
+#enemy-hand { min-height: 76px; }
+
+.card {
+  position: relative; width: 118px; height: 164px; flex: 0 0 auto;
+  background: linear-gradient(160deg, #fff8e7, var(--parchment) 60%, #e8d5ae);
+  color: var(--ink); border-radius: 10px; border: 3px solid var(--wind, #888);
+  box-shadow: 0 5px 14px rgba(0,0,0,.45);
+  padding: 6px 7px; cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.card.mini { width: 104px; height: 146px; }
+.card:hover { transform: translateY(-7px) scale(1.04); box-shadow: 0 12px 22px rgba(0,0,0,.55); z-index: 3; }
+.board-row .card:hover { transform: scale(1.05); }
+.card.selected { outline: 3px solid var(--gold); transform: translateY(-9px) scale(1.06); }
+.card.targetable { outline: 3px dashed #ff5d73; }
+.card.unaffordable { filter: saturate(.35) brightness(.82); }
+.card.exhausted { filter: saturate(.3) brightness(.75); transform: rotate(-2deg); }
+.card.back {
+  width: 52px; height: 72px; cursor: default;
+  background: repeating-linear-gradient(45deg, #274b8f 0 8px, #1d3868 8px 16px);
+  border-color: #0f2148; display: flex; align-items: center; justify-content: center;
+}
+.card.back:hover { transform: none; }
+.back-rune { font-size: 24px; color: #bcd2ff; }
+
+.card-cost {
+  position: absolute; top: -8px; left: -8px; width: 30px; height: 30px; z-index: 2;
+  border-radius: 50%; background: radial-gradient(circle at 35% 30%, #b8ffe9, #15965f);
+  border: 2px solid #0b5c39; color: #06351f; font-weight: bold; font-size: 17px;
+  display: flex; align-items: center; justify-content: center;
+}
+.wind-badge { position: absolute; top: 4px; right: 7px; font-size: 17px; color: var(--wind); }
+.card-art {
+  height: 52px; margin-top: 8px; border-radius: 6px;
+  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--wind) 55%, white), var(--wind));
+  color: rgba(255,255,255,.92); font-size: 34px;
+  display: flex; align-items: center; justify-content: center;
+  text-shadow: 0 2px 5px rgba(0,0,0,.4);
+}
+.card.mini .card-art { height: 44px; font-size: 29px; }
+.card-name { font-size: 13.5px; font-weight: bold; text-align: center; margin-top: 4px; line-height: 1.1; }
+.card-text { font-size: 11px; text-align: center; font-style: italic; color: #5a4632; min-height: 15px; margin-top: 2px; }
+.card-stats {
+  position: absolute; bottom: 5px; left: 7px; right: 7px;
+  display: flex; justify-content: space-between; font-size: 16.5px; font-weight: bold;
+}
+.card-stats .atk { color: #a33327; }
+.card-stats .hp { color: #b03060; }
+.card-stats.spell-tag { justify-content: center; color: var(--wind); letter-spacing: 2px; font-size: 12.5px; }
+
+.board-empty { font-style: italic; color: rgba(246,234,210,.5); font-size: 15px; }
+
+/* ---------------- animation & feedback ---------------- */
+
+@keyframes dealIn { from { transform: translateY(-46px) rotate(-5deg); opacity: 0; } to { transform: none; opacity: 1; } }
+#player-hand .card { animation: dealIn .35s ease both; }
+
+@keyframes popIn { 0% { transform: scale(.6); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.card.just-played { animation: popIn .3s ease; }
+
+@keyframes lungeUp { 40% { transform: translateY(-26px) scale(1.07); } }
+@keyframes lungeDown { 40% { transform: translateY(26px) scale(1.07); } }
+.card.lunging-up { animation: lungeUp .3s ease; }
+.card.lunging-down { animation: lungeDown .3s ease; }
+
+@keyframes shake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+.hurt { animation: shake .35s ease; filter: brightness(1.4) sepia(.6) hue-rotate(-38deg) saturate(2.4); }
+
+@keyframes dieAway { to { transform: translateY(16px) rotate(7deg) scale(.82); opacity: 0; } }
+.card.dying { animation: dieAway .45s ease forwards; }
+
+.floater {
+  position: fixed; z-index: 50; font-size: 27px; font-weight: bold; pointer-events: none;
+  animation: floatUp 1.05s ease forwards; text-shadow: 0 2px 4px rgba(0,0,0,.75);
+}
+.floater.dmg { color: #ff6b5e; }
+.floater.heal { color: #7be495; }
+@keyframes floatUp { to { transform: translateY(-44px); opacity: 0; } }

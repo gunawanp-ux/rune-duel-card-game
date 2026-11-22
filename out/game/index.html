@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rune Duel — Cards of the Four Winds</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ TITLE SCREEN ============ -->
+  <section id="title-screen" class="screen">
+    <div class="title-art">
+      <div class="title-runes"><span class="rune ember">&#9650;</span><span class="rune tide">&#9679;</span><span class="rune grove">&#9670;</span><span class="rune gale">&#9733;</span></div>
+      <h1 class="game-logo">RUNE DUEL</h1>
+      <p class="tagline">Cards of the Four Winds</p>
+      <p class="title-blurb">A card duel of ember, tide, grove and gale.<br>
+      Summon creatures, cast runes, and break the Bramble Witch before she breaks you.</p>
+      <button id="start-btn" class="big-btn">Enter the Duel</button>
+      <button id="howto-btn" class="ghost-btn">How to Play</button>
+      <div id="howto" class="howto hidden">
+        <h3>How to Play</h3>
+        <ul>
+          <li><b>Goal:</b> reduce Sova the Bramble Witch from 24 life to 0. If yours hits 0, you fall.</li>
+          <li><b>Energy:</b> you gain 1 energy gem each turn (max 8). Cards cost gems, shown top-left.</li>
+          <li><b>Playing:</b> click a card in your hand to summon or cast it. Boards hold up to 5 creatures.</li>
+          <li><b>Attacking:</b> click one of your ready creatures, then click an enemy creature — or Sova herself. A creature cannot attack the turn it is summoned, unless it has <b>Rush</b>.</li>
+          <li><b>Guard</b> creatures must be attacked first. <b>Spark</b> burns a target when summoned. <b>Mend</b> heals you. <b>Draw</b> fetches more cards.</li>
+          <li><b>Kindred:</b> a creature gets +1 attack while another creature of the same wind stands on your board.</li>
+          <li>Press <b>End Turn</b> when you are done, and watch what Sova answers with.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TABLE SCREEN ============ -->
+  <section id="table-screen" class="screen hidden">
+    <header id="topbar">
+      <div class="hero enemy-hero">
+        <div class="hero-face witch">&#10047;</div>
+        <div class="hero-info">
+          <div class="hero-name">SOVA, the Bramble Witch</div>
+          <div class="life"><span class="heart">&#9829;</span> <span id="enemy-life">24</span></div>
+        </div>
+        <div class="hero-deck">Deck <span id="enemy-deck">26</span> &middot; Hand <span id="enemy-hand-count">4</span></div>
+      </div>
+      <div id="turn-banner">Your turn</div>
+      <div class="score-box">Damage dealt <span id="score-dealt">0</span></div>
+    </header>
+
+    <div id="enemy-hand" class="card-row backs"></div>
+    <div id="enemy-board" class="board-row"></div>
+
+    <div id="midline"><span id="log-line">The duel begins.</span></div>
+
+    <div id="player-board" class="board-row"></div>
+
+    <footer id="bottombar">
+      <div class="hero player-hero">
+        <div class="hero-face captain">&#9873;</div>
+        <div class="hero-info">
+          <div class="hero-name">YOU, the Stormcaller</div>
+          <div class="life"><span class="heart">&#9829;</span> <span id="player-life">24</span></div>
+        </div>
+        <div class="energy">Energy <span id="energy-pips"></span></div>
+        <div class="hero-deck">Deck <span id="player-deck">26</span></div>
+      </div>
+      <div id="player-hand" class="card-row"></div>
+      <button id="end-turn-btn" class="big-btn small">End Turn</button>
+    </footer>
+  </section>
+
+  <!-- ============ END SCREEN ============ -->
+  <section id="end-screen" class="screen hidden">
+    <div class="end-art">
+      <h1 id="end-title">VICTORY</h1>
+      <p id="end-text">The Bramble Witch scatters to petals and ash.</p>
+      <div id="end-stats"></div>
+      <button id="again-btn" class="big-btn">Play Again</button>
+    </div>
+  </section>
+
+</div>
+<script type="module" src="js/game.js"></script>
+</body>
+</html>
